@@ -223,8 +223,8 @@ def handle_bgmi(message):
         # Check if the user is in admin_id (admins have no cooldown)
         if user_id not in admin_id:
             # Check if the user has run the command before and is still within the cooldown period
-            if user_id in bgmi_cooldown and (datetime.datetime.now() - bgmi_cooldown[user_id]).seconds < 300:
-                response = "You Are On Cooldown. Please Wait 5min Before Running The /bgmi Command Again."
+            if user_id in bgmi_cooldown and (datetime.datetime.now() - bgmi_cooldown[user_id]).seconds < 10:
+                response = "You Are On Cooldown. Please Wait 10 Second Before Running The /bgmi Command Again."
                 bot.reply_to(message, response)
                 return
             # Update the last time the user ran the command
@@ -320,14 +320,14 @@ def welcome_plan(message):
     response = f'''{user_name}, Brother Only 1 Plan Is Powerfull Then Any Other Ddos !!:
 
 Vip :
--> Attack Time : 200 (S)
-> After Attack Limit : 2 Min
--> Concurrents Attack : 300
+-> Attack Time : 300 (S)
+> After Attack Limit : 10 Sec
+-> Concurrents Attack : 5
 
 Pr-ice List:
 Day-->150 Rs
-Week-->900 Rs
-Month-->1600 Rs
+Week-->600 Rs
+Month-->1500 Rs
 By Indian Watchdogs @Indian_Hackers_Team
 '''
     bot.reply_to(message, response)
