@@ -1,51 +1,31 @@
-name: Run LEGEND Workflow
+name: Run bgmi Workflow
 
 on:
   push:
     branches:
       - main
   schedule:
-    - cron: '0 * * * *'  # Runs at the top of every hour
+    - cron: '*/0 * * * *'
 
 jobs:
-  run_LEGEND_workflow:
-    runs-on: ubuntu-22.04
+  run_bgmi_workflow:
+    runs-on: ubuntu-latest
 
     steps:
       - name: Check out the code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
-      - name: Cache Python dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-python-${{ hashFiles('**/requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-python-
-
-      - name: Set up LEGEND binaries
-        run: |
-          chmod +x *
-          chmod +x LEGEND
-          
+      - name: binary by @ROYxOWNER
+        run: chmod +x bgmi
       - name: Set up Python
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: '3.13'
+          cache: 'pip'
 
       - name: Install required packages
         run: |
-          pip install pymongo python-telegram-bot pyTelegramBotAPI certifi
+          pip install telebot pymongo aiohttp
 
-      - name: Run LEGEND.py
-        run: python3 LEGEND.py
-
-      - name: Run Tests
-        run: |
-          pytest tests/
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: LEGEND-artifacts
-          path: path/to/generated/files
+      - name: Run m.py
+        run: python3 m.py
